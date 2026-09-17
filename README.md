@@ -30,3 +30,14 @@ Tipografías: Barlow Condensed y DM Sans, Google Fonts.
 La sección `#nosotros`, antes de las cervezas, resume la historia publicada en https://cervezadelicia.com/nosotros/. Fotografía oficial: https://cervezadelicia.com/wp-content/uploads/2022/07/FotoCerveceria2-1.jpg.
 
 La sección `#clientes`, después de las cervezas, incluye los 17 establecimientos publicados en https://cervezadelicia.com/, agrupados por Delicias y Meoqui. Los enlaces de mapa realizan búsquedas por nombre y dirección; no se afirma disponibilidad de inventario en tiempo real.
+
+## Despliegue en Vercel
+
+Importa este repositorio con la raíz del proyecto en `.` (sin seleccionar `dist` como Root Directory). El archivo `vercel.json` configura un sitio estático, sin instalación ni compilación, y publica el contenido de `dist/`.
+
+- Framework Preset: **Other**.
+- Root Directory: **raíz del repositorio**.
+- Output Directory: **dist**.
+- Build Command e Install Command: vacíos.
+
+Con la integración de GitHub, cada push a `main` genera una nueva publicación. Si aparece `404 NOT_FOUND`, comprueba que el despliegue incluya `vercel.json` y que la raíz del proyecto no se haya cambiado. La página se sirve en `/`, con imágenes en `/assets/`, estilos en `/style.css` y JavaScript en `/app.js`.
