@@ -24,3 +24,9 @@ Información e imágenes: https://cervezadelicia.com/inicio/.
 Pionera: /wp-content/uploads/2026/04/Publicidad-Pionera-Vertical.png.
 Resto: /wp-content/uploads/2023/10/{Monito-2,Red,Porter,Pale-Ale}.png.
 Tipografías: Barlow Condensed y DM Sans, Google Fonts.
+
+## Historia y puntos de venta
+
+La sección `#nosotros`, antes de las cervezas, resume la historia publicada en https://cervezadelicia.com/nosotros/. Fotografía oficial: https://cervezadelicia.com/wp-content/uploads/2022/07/FotoCerveceria2-1.jpg.
+
+La sección `#clientes`, después de las cervezas, incluye los 17 establecimientos publicados en https://cervezadelicia.com/, agrupados por Delicias y Meoqui. Los enlaces de mapa realizan búsquedas por nombre y dirección; no se afirma disponibilidad de inventario en tiempo real.
