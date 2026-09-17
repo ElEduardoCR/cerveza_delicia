@@ -19,25 +19,115 @@ const beers=[
 ];
 document.querySelector('#beers').innerHTML=beers.map((b,i)=>`<section class="beer-section ${i%2?'reverse':''}" id="${b.id}" aria-labelledby="name-${b.id}" style="--scene-bg:${b.bg};--scene-fg:${b.fg};--accent:${b.accent}"><div class="beer-stage"><div class="scene-top"><span>0${i+1} / 05</span><span>${b.tag}</span><span>DELICIA · CHIHUAHUA</span></div><span class="giant-word" aria-hidden="true">${b.word}</span><div class="bottle-space"><div class="orbit" aria-hidden="true"></div><div class="bottle-motion">${bottleSVG(b.id,'product-bottle',b.name)}</div><span class="bottle-ground" aria-hidden="true"></span><span class="bottle-caption">CERVEZA ARTESANAL · ${b.style.toUpperCase()}</span></div><div class="beer-copy"><div class="beer-eyebrow"><span>${b.style}</span><span class="abv"><strong>${b.abv}%</strong> ALC. VOL.</span></div><h2 id="name-${b.id}">${b.name}</h2><p class="beer-headline">${b.title.replace('<br>','<br> ')}</p><div class="beer-details"><p class="description">${b.description}</p><ul class="notes" aria-label="Perfil de sabor">${b.notes.map(n=>`<li>${n}</li>`).join('')}</ul><div class="pairing"><span>VA MUY BIEN CON</span><p>${b.pairing}</p></div></div></div><div class="scene-bottom"><span>HECHA EN DELICIAS, CHIHUAHUA</span><a href="#${beers[i+1]?.id||'origen'}">${i===4?'DISFRUTA EL MOMENTO':'SIGUE DESCUBRIENDO'} <span>↓</span></a></div><div class="scene-progress" aria-hidden="true"></div></div></section>`).join('');
 document.querySelector('.beer-nav').innerHTML=beers.map((b,i)=>`<a href="#${b.id}" aria-label="${b.name}"><span>${b.name}</span><i>0${i+1}</i></a>`).join('');
-// Native scrolling stays in control. One demand-driven animation loop only updates
-// transforms/opacity for visible scenes; time-based damping works at 60/120 Hz.
-const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
-const smallScreen=matchMedia('(max-width: 800px)');
-const sections=[...document.querySelectorAll('.beer-section')].map((el,i)=>({el,i,bottle:el.querySelector('.bottle-motion'),copy:el.querySelector('.beer-copy'),details:el.querySelector('.beer-details'),word:el.querySelector('.giant-word'),ground:el.querySelector('.bottle-ground'),progress:el.querySelector('.scene-progress'),active:false,value:null,top:0,height:0}));
-const nav=document.querySelector('.beer-nav');const navLinks=[...nav.children];
-const clamp=(v,min=0,max=1)=>Math.min(max,Math.max(min,v));
-const ease=v=>1-Math.pow(1-clamp(v),3);
-let frame=0,last=0,scrollPosition=scrollY,viewport=innerHeight;
-function measure(){viewport=innerHeight;for(const s of sections){s.top=s.el.getBoundingClientRect().top+scrollY;s.height=s.el.offsetHeight;s.value=null;}requestTick();}
-function render(now){frame=0;const dt=Math.min(64,now-(last||now-16));last=now;let unsettled=false;let current=-1;
- for(const s of sections){if(!s.active)continue;const target=clamp((scrollPosition-s.top+viewport*.82)/(s.height-viewport*.18));if(s.value===null||reducedMotion.matches)s.value=target;else s.value+=(target-s.value)*(1-Math.exp(-dt/95));if(Math.abs(target-s.value)>.0002)unsettled=true;const p=s.value;const dir=s.i%2?-1:1;const arrive=ease(p/.43);const leave=ease((p-.83)/.17);const enterCopy=ease((p-.18)/.27);const enterDetails=ease((p-.32)/.24);const mobile=smallScreen.matches;
- if(reducedMotion.matches){s.bottle.style.transform=`rotate(${dir*-8}deg)`;s.copy.style.opacity=1;s.copy.style.transform='none';s.details.style.opacity=1;s.details.style.transform='none';s.word.style.transform='none';}
- else{s.bottle.style.transform=`translate3d(${dir*(1-arrive)*(mobile?45:120)}px,${(1-arrive)*150-leave*25}px,0) rotateY(${dir*(32-arrive*39+leave*16)}deg) rotateX(${(1-arrive)*9}deg) rotateZ(${dir*(-25+arrive*15+leave*7)}deg) scale(${.86+arrive*.14})`;s.copy.style.opacity=enterCopy;s.copy.style.transform=`translate3d(${dir*-35*(1-enterCopy)}px,${25*(1-enterCopy)}px,0)`;s.details.style.opacity=enterDetails;s.details.style.transform=`translate3d(0,${22*(1-enterDetails)}px,0)`;s.word.style.transform=`translate3d(${dir*(.5-p)*65}px,0,0)`;}
- s.ground.style.transform=`translateX(-50%) scaleX(${.7+arrive*.3})`;s.ground.style.opacity=.12+arrive*.18;s.progress.style.transform=`scaleX(${clamp((scrollPosition-s.top)/(s.height-viewport))})`;if(scrollPosition>=s.top-viewport*.35&&scrollPosition<s.top+s.height-viewport*.35)current=s.i;
- }
- nav.classList.toggle('visible',current>=0);navLinks.forEach((a,i)=>{if(i===current)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});
- if(unsettled&&!reducedMotion.matches)frame=requestAnimationFrame(render);
+// Native scrolling stays in control. Bottle movement follows the actual sticky
+// interval; text reveals finish on their own, even if the visitor stops scrolling.
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const smallScreen = matchMedia('(max-width: 800px)');
+const sections = [...document.querySelectorAll('.beer-section')].map((el, i) => ({
+  el, i,
+  stage: el.querySelector('.beer-stage'),
+  bottle: el.querySelector('.bottle-motion'),
+  word: el.querySelector('.giant-word'),
+  ground: el.querySelector('.bottle-ground'),
+  progress: el.querySelector('.scene-progress'),
+  active: false, value: null, top: 0, height: 0, pinned: 0
+}));
+const nav = document.querySelector('.beer-nav');
+const navLinks = [...nav.children];
+const clamp = (value) => Math.min(1, Math.max(0, value));
+const ease = (value) => 1 - Math.pow(1 - clamp(value), 3);
+let frame = 0;
+let last = 0;
+let scrollPosition = scrollY;
+let viewport = innerHeight;
+
+function measure() {
+  viewport = innerHeight;
+  for (const scene of sections) {
+    scene.top = scene.el.getBoundingClientRect().top + scrollY;
+    scene.height = scene.el.getBoundingClientRect().height;
+    scene.pinned = getComputedStyle(scene.stage).position === 'sticky'
+      ? Math.max(0, scene.height - scene.stage.getBoundingClientRect().height)
+      : 0;
+    scene.value = null;
+  }
+  requestTick();
 }
-function requestTick(){scrollPosition=scrollY;if(!frame)frame=requestAnimationFrame(render);}
-const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{const s=sections.find(s=>s.el===entry.target);s.active=entry.isIntersecting;});requestTick();},{rootMargin:'20% 0px'});sections.forEach(s=>observer.observe(s.el));
-addEventListener('scroll',requestTick,{passive:true});addEventListener('resize',measure,{passive:true});reducedMotion.addEventListener('change',measure);document.fonts.ready.then(measure);measure();
+
+function render(now) {
+  frame = 0;
+  const dt = Math.min(64, now - (last || now - 16));
+  last = now;
+  let unsettled = false;
+  let current = -1;
+
+  for (const scene of sections) {
+    if (!scene.active) continue;
+    // Reach the final pose BEFORE the sticky panel is released, including short
+    // screens, reduced motion, and scenes without a sticky interval.
+    const leadIn = viewport * .7;
+    const target = clamp((scrollPosition - scene.top + leadIn) /
+      Math.max(1, scene.pinned + leadIn));
+    if (scene.value === null || reducedMotion.matches) scene.value = target;
+    else {
+      scene.value += (target - scene.value) * (1 - Math.exp(-dt / 80));
+      if (Math.abs(target - scene.value) > .0001) unsettled = true;
+      else scene.value = target;
+    }
+    const p = scene.value;
+    const direction = scene.i % 2 ? -1 : 1;
+    const arrive = ease(p / .6);
+    // Keep a gentle turn throughout the pinned interval, without a dead zone.
+    const turn = clamp((p - .2) / .8);
+    const mobile = smallScreen.matches;
+
+    // Once revealed, text remains fully readable when scrolling back. CSS owns
+    // the finite reveal, so stopping the wheel cannot freeze it half-transparent.
+    if (target >= .3 || reducedMotion.matches) scene.el.classList.add('is-revealed');
+
+    if (reducedMotion.matches) {
+      scene.bottle.style.transform = `rotate(${direction * -8}deg)`;
+      scene.word.style.transform = 'none';
+    } else {
+      scene.bottle.style.transform =
+        `translate3d(${direction * (1 - arrive) * (mobile ? 45 : 100)}px,${(1 - arrive) * 120 - turn * 22}px,0) ` +
+        `rotateY(${direction * (28 * (1 - arrive) - 14 + turn * 24)}deg) ` +
+        `rotateX(${(1 - arrive) * 8}deg) ` +
+        `rotateZ(${direction * (-24 + arrive * 10 + turn * 8)}deg) ` +
+        `scale(${.88 + arrive * .12})`;
+      scene.word.style.transform = `translate3d(${direction * (.5 - p) * 65}px,0,0)`;
+    }
+    scene.ground.style.transform = `translateX(-50%) scaleX(${.7 + arrive * .3})`;
+    scene.ground.style.opacity = .12 + arrive * .18;
+    scene.progress.style.transform = `scaleX(${p})`;
+    if (scrollPosition >= scene.top - viewport * .35 &&
+        scrollPosition < scene.top + scene.height - viewport * .35) current = scene.i;
+  }
+
+  nav.classList.toggle('visible', current >= 0);
+  navLinks.forEach((link, i) => {
+    if (i === current) link.setAttribute('aria-current', 'true');
+    else link.removeAttribute('aria-current');
+  });
+  if (unsettled && !reducedMotion.matches) frame = requestAnimationFrame(render);
+  else last = 0;
+}
+
+function requestTick() {
+  scrollPosition = scrollY;
+  if (!frame) frame = requestAnimationFrame(render);
+}
+
+const observer = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    sections.find(scene => scene.el === entry.target).active = entry.isIntersecting;
+  }
+  requestTick();
+}, { rootMargin: '20% 0px' });
+sections.forEach(scene => observer.observe(scene.el));
+addEventListener('scroll', requestTick, { passive: true });
+addEventListener('resize', measure, { passive: true });
+addEventListener('pageshow', measure);
+reducedMotion.addEventListener('change', measure);
+document.fonts.ready.then(measure);
+measure();
