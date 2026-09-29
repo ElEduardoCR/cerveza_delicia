@@ -27,3 +27,26 @@
 @media(max-width:800px){.header nav{gap:20px}.about{padding:35px 7% 65px}.section-kicker{font-size:11px;line-height:1.7;letter-spacing:1px}.section-kicker>span:last-child{text-align:right}.about-grid{grid-template-columns:1fr;gap:30px;margin-top:35px}.about-copy h2{font-size:clamp(52px,9vw,72px)}.about-copy h2 br:nth-child(2){display:none}.about-copy h2 br:nth-child(2):after{content:' '}.about-copy p{max-width:none}.about-photo figcaption{margin-top:12px}.stockists{padding:35px 7% 60px}.stockists-heading{display:block;margin:35px 0}.stockists-heading h2{font-size:clamp(48px,8vw,70px)}.stockists-heading>p{max-width:450px;margin-top:22px}.venue-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}.city-group{margin-top:35px}.city-group>h3{font-size:25px}.hero-bottom p strong{font-weight:700}}
 @media(max-width:480px){.header .wordmark{font-size:32px}.header .wordmark span{font-size:7px;letter-spacing:1.4px}.header nav{gap:12px;font-size:11px}.header nav a span{display:none}.section-kicker{display:block}.section-kicker>span{display:block}.section-kicker>span:last-child{text-align:left;margin-top:7px;opacity:.75}.venue-grid{grid-template-columns:1fr}.venue{padding:20px 0}.venue h4{font-size:18px}.venue>a{min-height:44px}.about-copy h2{font-size:52px}.about-copy h2 br:nth-child(2){display:block}}
 @media(max-width:480px){.header{height:122px;display:grid;grid-template-columns:1fr;align-content:center;gap:15px}.header nav{justify-content:space-between;gap:12px;font-size:13px}.header nav a{min-height:32px}.hero{padding-top:148px}}
+/* Tienda en línea: accesos desde la landing (encabezado, cada cerveza y puntos de venta). */
+.header nav{margin-left:auto}
+.header-actions{display:flex;align-items:center;gap:12px;margin-left:40px}
+.shop-pill{display:inline-flex;align-items:center;gap:5px;min-height:44px;padding:0 20px;border-radius:999px;background:var(--yellow);color:var(--ink);font-size:13px;font-weight:700;letter-spacing:.3px;transition:background .2s}
+.shop-pill:hover{background:#f5e27a}
+.header .cart-button{width:44px;height:44px;background:transparent;color:var(--cream);border:1px solid #ffffff55}
+.header .cart-button:hover{border-color:var(--cream);transform:none}
+.header .cart-count{background:var(--yellow);box-shadow:0 0 0 2px var(--ink)}
+.beer-buy{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:22px;padding-top:18px;border-top:1px solid color-mix(in srgb,var(--scene-fg) 25%,transparent)}
+.beer-price{margin:0;font-size:12px;line-height:1.4;letter-spacing:.3px}
+.beer-price strong{font:800 30px/1 'Barlow Condensed',Impact,sans-serif;margin-right:3px}
+.buy-button{display:inline-flex;align-items:center;gap:14px;flex:none;min-height:48px;padding:0 9px 0 22px;border:0;border-radius:999px;background:var(--scene-fg);color:var(--scene-bg);font:700 14px 'DM Sans',sans-serif;letter-spacing:.3px;cursor:pointer;transition:transform .2s}
+.buy-plus{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--scene-bg);color:var(--scene-fg);font-size:20px;line-height:1}
+.buy-button:hover{transform:translateY(-2px)}
+.buy-button:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.buy-button:focus-visible{outline:2px solid var(--scene-fg);outline-offset:4px}
+.stockists-heading>div{max-width:310px}
+.stockists-heading>div>p{font-size:16px;line-height:1.65;margin:0 0 14px}
+.stockists-shop{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap;min-height:44px;font-size:14px;border-bottom:1px solid currentColor}
+.stockists-shop span{font-size:18px}
+@media(max-width:800px){.header-actions{margin-left:18px;gap:8px}.shop-pill{padding:0 15px;font-size:12px}.shop-pill .long{display:none}.beer-buy{margin-top:12px;padding-top:12px}.beer-price strong{font-size:25px}.buy-button{min-height:44px}.stockists-heading>div{max-width:450px;margin-top:22px}}
+@media(max-width:480px){.header{grid-template-columns:1fr auto}.header nav{grid-column:1/-1;grid-row:2;margin-left:0}.header-actions{grid-row:1;grid-column:2;margin-left:0}}
+@media(prefers-reduced-motion:reduce){.buy-button,.shop-pill{transition:none}}

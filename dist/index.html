@@ -6,10 +6,11 @@
 <meta name="description" content="Cinco estilos de cerveza artesanal hechos en Ciudad Delicias, Chihuahua. Descubre Pionera, Monito de Meoqui, Irish Red Ale, London Porter y American Pale Ale.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%23ecd447'/%3E%3Ctext x='32' y='47' font-family='Georgia' font-weight='bold' font-size='47' text-anchor='middle' fill='%23171914'%3ED%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/shop/shop.css">
 </head>
 <body>
 <a class="skip" href="#estilos">Saltar a las cervezas</a>
-<header class="header"><a href="#inicio" class="wordmark" aria-label="Delicia, inicio">delicia<span>CERVEZA ARTESANAL</span></a><nav aria-label="Navegación principal"><a href="#nosotros">Quiénes somos</a><a href="#pionera">Cervezas</a><a href="#clientes">Dónde comprar <span>↗</span></a></nav></header>
+<header class="header"><a href="#inicio" class="wordmark" aria-label="Delicia, inicio">delicia<span>CERVEZA ARTESANAL</span></a><nav aria-label="Navegación principal"><a href="#nosotros">Quiénes somos</a><a href="#pionera">Cervezas</a><a href="#clientes">Dónde comprar <span>↗</span></a></nav><div class="header-actions"><a class="shop-pill" href="/tienda/">Tienda <span class="long">en línea</span></a><button type="button" class="cart-button" data-cart-open aria-label="Abrir carrito"><span data-icon="bag"></span><span class="cart-count" data-cart-count hidden>0</span></button></div></header>
 <main>
 <section class="hero" id="inicio" aria-labelledby="hero-title">
 <div class="hero-topline"><span>TIERRA NORTEÑA. ESPÍRITU CERVECERO.</span><span>28°11′ N &nbsp; 105°28′ O</span></div>
@@ -32,7 +33,7 @@
 <div id="estilos" class="collection"><div class="collection-heading"><span>LA FAMILIA DELICIA</span><span>05 ESTILOS / UN MISMO ORIGEN</span></div><div id="beers"></div></div>
 <section class="stockists" id="clientes" aria-labelledby="stockists-title">
 <div class="section-kicker"><span>NUESTROS CLIENTES</span><span>DELICIAS + MEOQUI</span></div>
-<div class="stockists-heading"><h2 id="stockists-title">TU PRÓXIMA DELICIA<br><em>ESTÁ CERCA.</em></h2><p>Encuéntranos en estos restaurantes, bares y puntos de venta de la región.</p></div>
+<div class="stockists-heading"><h2 id="stockists-title">TU PRÓXIMA DELICIA<br><em>ESTÁ CERCA.</em></h2><div><p>Encuéntranos en estos restaurantes, bares y puntos de venta de la región.</p><a class="stockists-shop" href="/tienda/">¿La quieres en casa? <strong>Pídela en línea</strong> <span aria-hidden="true">→</span></a></div></div>
 <div class="city-group"><h3>Delicias<span>CHIHUAHUA</span></h3><ul class="venue-grid"><li class="venue"><h4>La Barrica vinos y licores</h4><p>Plaza Bella, Plaza Bonita y Plaza Esmeralda</p><a href="https://www.google.com/maps/search/?api=1&amp;query=La+Barrica+vinos+y+licores%2C+Plaza+Bella%2C+Plaza+Bonita+y+Plaza+Esmeralda%2C+Delicias%2C+Chihuahua%2C+M%C3%A9xico" target="_blank" rel="noopener noreferrer" aria-label="Buscar La Barrica vinos y licores en Google Maps (abre otra pestaña)">Ver en mapa <span aria-hidden="true">↗</span></a></li>
 <li class="venue"><h4>Maclovio’s Restaurante</h4><p>Blvd. Gómez Morin 106</p><a href="https://www.google.com/maps/search/?api=1&amp;query=Maclovio%E2%80%99s+Restaurante%2C+Blvd.+G%C3%B3mez+Morin+106%2C+Delicias%2C+Chihuahua%2C+M%C3%A9xico" target="_blank" rel="noopener noreferrer" aria-label="Buscar Maclovio’s Restaurante en Google Maps (abre otra pestaña)">Ver en mapa <span aria-hidden="true">↗</span></a></li>
 <li class="venue"><h4>Trinken Delicias</h4><p>Av. Gómez Morin</p><a href="https://www.google.com/maps/search/?api=1&amp;query=Trinken+Delicias%2C+Av.+G%C3%B3mez+Morin%2C+Delicias%2C+Chihuahua%2C+M%C3%A9xico" target="_blank" rel="noopener noreferrer" aria-label="Buscar Trinken Delicias en Google Maps (abre otra pestaña)">Ver en mapa <span aria-hidden="true">↗</span></a></li>
@@ -55,5 +56,5 @@
 </main>
 <footer><a href="#inicio" class="wordmark">delicia<span>CERVEZA ARTESANAL</span></a><span class="footer-maker">Hecha por <strong>Cervecería Backhoff</strong><br>Ciudad Delicias, Chihuahua, México</span><span>Disfruta con moderación. Solo mayores de edad.</span></footer>
 <nav class="beer-nav" aria-label="Ir a una cerveza"></nav>
-<script src="/app.js" defer></script>
+<script type="module" src="/app.js"></script>
 </body></html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#171914"><title>Tienda en línea — Cerveza Delicia</title>
+<meta name="description" content="Compra cerveza artesanal Delicia por unidad, six, 12, 18 o caja de 24. Envío en Delicias y Meoqui y pago con tarjeta.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%23ecd447'/%3E%3Ctext x='32' y='47' font-family='Georgia' font-weight='bold' font-size='47' text-anchor='middle' fill='%23171914'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/shop/shop.css">
+<script type="module" src="/shop/tienda.js"></script>
+</head>
+<body class="shop">
+<a class="skip" href="#productos">Saltar a las cervezas</a>
+<div class="demo-bar"><p><strong>Demostración:</strong> pagos, SMS y WhatsApp son simulados y no se hace ningún cargo.<span class="demo-extra"> Tarjeta de prueba <code>4242 4242 4242 4242</code>.</span></p></div>
+<header class="shop-header">
+<a href="/" class="shop-wordmark" aria-label="Delicia, volver al inicio">delicia<span>TIENDA EN LÍNEA</span></a>
+<nav class="shop-nav" aria-label="Tienda"><a href="/">Nuestra historia</a><a href="/tienda/" aria-current="page">Cervezas</a><a href="/cuenta/">Mis pedidos</a></nav>
+<div class="shop-actions"><a class="account-link" href="/cuenta/"><span data-icon="user"></span><span data-account-label>Entrar</span></a><button type="button" class="cart-button" data-cart-open aria-label="Abrir carrito"><span data-icon="bag"></span><span class="cart-count" data-cart-count hidden>0</span></button></div>
+</header>
+<main>
+<section class="shop-hero" aria-labelledby="shop-title">
+<p class="kicker">Tienda en línea · Delicias, Chihuahua</p>
+<h1 id="shop-title">PÍDELA<br><em>A TU PUERTA.</em></h1>
+<p class="shop-hero-lead">Por unidad, six, 12, 18 o caja de 24. Combina estilos como quieras y paga con tarjeta.</p>
+<ul class="perks">
+<li><span data-icon="truck"></span><strong>Envío en Delicias y Meoqui</strong><span><span data-ship="fee">$60</span> · gratis desde <span data-ship="free">$800</span></span></li>
+<li><span data-icon="store"></span><strong>Recoge sin costo</strong><span>En la cervecería, en Ciudad Delicias</span></li>
+<li><span data-icon="card"></span><strong>Pago con tarjeta</strong><span>Visa, Mastercard y American Express</span></li>
+<li><span data-icon="phone"></span><strong>Sin correo ni contraseña</strong><span>Entras con tu celular y un código</span></li>
+</ul>
+</section>
+<div id="productos" class="product-list" aria-label="Cervezas"></div>
+<section class="faq" aria-labelledby="faq-title">
+<h2 id="faq-title">ANTES DE<br><em>PEDIR.</em></h2>
+<div class="faq-list">
+<details><summary>¿Cómo creo mi cuenta?</summary><p>Solo con tu número de celular. Te enviamos un código de 6 dígitos por WhatsApp o SMS y, si es tu primera compra, nos dices tu nombre. No usamos correo electrónico ni contraseñas.</p></details>
+<details><summary>¿Puedo combinar estilos?</summary><p>Sí. Cada cerveza se vende por unidad, six, 12, 18 o caja de 24, y en el carrito puedes juntar las presentaciones y estilos que quieras. Mientras más grande la presentación, menor el precio por botella.</p></details>
+<details><summary>¿A dónde entregan?</summary><p>Entregamos a domicilio en Delicias y Meoqui. El envío cuesta <span data-ship="fee">$60</span> y es gratis en pedidos desde <span data-ship="free">$800</span>. También puedes recoger sin costo en la cervecería; te compartimos la ubicación por WhatsApp.</p></details>
+<details><summary>¿Qué necesito para recibir mi pedido?</summary><p>Una identificación oficial vigente. La venta de alcohol es exclusiva para mayores de 18 años y la persona que recibe debe ser mayor de edad.</p></details>
+<details><summary>¿Cómo sé en qué va mi pedido?</summary><p>Te avisamos por WhatsApp o SMS cuando lo preparamos, cuando sale a tu domicilio (o está listo para recoger) y cuando se entrega. También puedes verlo en «Mis pedidos».</p></details>
+</div>
+</section>
+</main>
+<footer class="shop-footer">
+<a href="/" class="shop-wordmark">delicia<span>CERVEZA ARTESANAL</span></a>
+<p>Hecha por <strong>Cervecería Backhoff</strong> · Ciudad Delicias, Chihuahua, México<br>Disfruta con moderación. Venta exclusiva a mayores de 18 años.</p>
+<a href="/admin/">Back office para Cervecería Backhoff</a>
+</footer>
+</body>
+</html>
