@@ -264,8 +264,8 @@ dialog.sheet.is-closing{animation:sheet-out .18s ease-in forwards}
 .product-index{position:absolute;top:22px;left:6%;font-size:12px;letter-spacing:1.6px;font-weight:600}
 .product-word{position:absolute;left:-1%;top:50%;z-index:-1;translate:0 -50%;font:800 clamp(120px,17vw,280px)/1 var(--display);white-space:nowrap;opacity:.08;pointer-events:none}
 .product-visual{display:flex;align-items:center;justify-content:center;height:clamp(300px,31vw,440px)}
-.product-bottle{height:100%;width:auto;filter:drop-shadow(18px 24px 16px #0006);transform:rotate(-8deg);transition:transform .6s cubic-bezier(.22,1,.36,1)}
-.product:hover .product-bottle{transform:rotate(-3deg) translateY(-8px)}
+.product-photo{height:100%;width:auto;filter:drop-shadow(18px 24px 16px #0006);transform:rotate(-8deg);transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.product:hover .product-photo{transform:rotate(-3deg) translateY(-8px)}
 .product-copy h2{margin:10px 0 16px;font:800 clamp(52px,5.4vw,88px)/.9 var(--display);text-transform:uppercase;letter-spacing:-.01em}
 .product-copy .eyebrow{display:flex;gap:6px 14px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid color-mix(in srgb,var(--p-fg) 30%,transparent)}
 .product-copy .eyebrow strong{font:800 22px/1 var(--display)}
@@ -279,7 +279,7 @@ dialog.sheet.is-closing{animation:sheet-out .18s ease-in forwards}
 .product-buy-head p{margin:0;font-size:13.5px;color:var(--muted)}
 .product-buy-head strong{font:800 36px/1 var(--display);color:var(--ink)}
 .sold-out{margin:14px 0 0;font-size:13.5px;font-weight:600;color:var(--danger)}
-.product.is-sold-out .product-bottle{filter:grayscale(.6) drop-shadow(18px 24px 16px #0006);opacity:.8}
+.product.is-sold-out .product-photo{filter:grayscale(.6) drop-shadow(18px 24px 16px #0006);opacity:.8}
 .sold-badge{position:absolute;top:18px;right:6%;padding:7px 14px;border-radius:99px;background:var(--ink);color:var(--cream);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .faq{padding:72px 6% 84px;display:grid;grid-template-columns:1fr 1.4fr;gap:40px 70px}
 .faq h2{margin:0;font:800 clamp(48px,5vw,76px)/.95 var(--display);text-transform:uppercase}

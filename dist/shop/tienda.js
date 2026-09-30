@@ -16,7 +16,7 @@ function productHTML(product, index, all) {
     <span class="product-index">0${index + 1} / 0${all.length}</span>
     <span class="product-word" aria-hidden="true">${product.word}</span>
     ${product.available ? '' : '<span class="sold-badge">Agotada</span>'}
-    <div class="product-visual"><img class="product-bottle" src="${bottleImage(product.id)}" alt="Botella de ${esc(product.name)}, ${BOTTLE_ML} ml" width="190" height="720"${index > 1 ? ' loading="lazy"' : ''}></div>
+    <div class="product-visual"><img class="product-photo" src="${bottleImage(product.id)}" alt="Botella de ${esc(product.name)}, ${BOTTLE_ML} ml" width="190" height="720"${index > 1 ? ' loading="lazy"' : ''}></div>
     <div class="product-copy">
       <p class="eyebrow"><span>${esc(product.style)}</span><span><strong>${product.abv}%</strong> alc. vol.</span><span>${BOTTLE_ML} ml</span></p>
       <h2 id="name-${product.id}">${esc(product.name)}</h2>
